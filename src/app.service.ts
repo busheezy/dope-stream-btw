@@ -14,7 +14,14 @@ export class AppService implements OnModuleInit {
   async onModuleInit() {
     this.client = new TwitchJs({
       username: this.appConfigService.twitchUsername,
-      token: this.appConfigService.twitchAccessToekn,
+      token: this.appConfigService.twitchAccessToken,
+      chat: {
+        connectionTimeout: 5000,
+        joinTimeout: 1000,
+        log: {
+          level: 'warn',
+        },
+      },
     });
 
     await this.connect();

@@ -9,7 +9,7 @@ export class AppConfigService {
     return this.configService.get('TWITCH_USERNAME');
   }
 
-  get twitchAccessToekn(): string {
+  get twitchAccessToken(): string {
     return this.configService.get('TWITCH_ACCESS_TOKEN');
   }
 
