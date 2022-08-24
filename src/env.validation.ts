@@ -13,13 +13,10 @@ class EnvironmentVariables {
   NODE_ENV: Environment;
 
   @IsString()
+  TWITCH_USERNAME: string;
+
+  @IsString()
   TWITCH_ACCESS_TOKEN: string;
-
-  @IsString()
-  TWITCH_REFRESH_TOKEN: string;
-
-  @IsString()
-  TWITCH_CLIENT_ID: string;
 }
 
 export function validate(config: Record<string, unknown>) {
