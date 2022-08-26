@@ -1,7 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import TwitchJs from 'twitch-js';
 import { AppConfigService } from './app.config.service';
-import { throttle } from 'lodash';
 
 const MESSAGE = 'dope stream btw';
 const CHANNEL = 'fenomm';
@@ -33,19 +32,13 @@ export class AppService implements OnModuleInit {
     await this.client.chat.join(CHANNEL);
 
     this.client.chat.on('PRIVMSG', async (privateMessage) => {
-      if (privateMessage.username === this.appConfigService.twitchUsername) {
+      if (privateMessage.username !== 'Aviko') {
         return;
       }
 
       if (privateMessage.message === MESSAGE) {
-        await this.throttledSay();
+        await this.client.chat.say(CHANNEL, MESSAGE);
       }
     });
   }
-
-  async say() {
-    await this.client.chat.say(CHANNEL, MESSAGE);
-  }
-
-  throttledSay = throttle(this.say, 30 * 1000);
 }
