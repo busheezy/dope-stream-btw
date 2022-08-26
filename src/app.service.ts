@@ -1,6 +1,7 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import TwitchJs from 'twitch-js';
 import { AppConfigService } from './app.config.service';
+import { throttle } from 'lodash';
 
 const MESSAGE = 'dope stream btw';
 const CHANNEL = 'fenomm';
@@ -37,8 +38,14 @@ export class AppService implements OnModuleInit {
       }
 
       if (privateMessage.message === MESSAGE) {
-        await this.client.chat.say(CHANNEL, MESSAGE);
+        await this.throttledSay();
       }
     });
   }
+
+  async say() {
+    await this.client.chat.say(CHANNEL, MESSAGE);
+  }
+
+  throttledSay = throttle(this.say, 5000);
 }
