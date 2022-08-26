@@ -47,5 +47,5 @@ export class AppService implements OnModuleInit {
     await this.client.chat.say(CHANNEL, MESSAGE);
   }
 
-  throttledSay = throttle(this.say, 5000);
+  throttledSay = throttle(this.say, 30 * 1000);
 }
