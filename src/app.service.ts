@@ -32,7 +32,7 @@ export class AppService implements OnModuleInit {
     await this.client.chat.join(CHANNEL);
 
     this.client.chat.on('PRIVMSG', async (privateMessage) => {
-      if (privateMessage.username == this.appConfigService.twitchUsername) {
+      if (privateMessage.username === this.appConfigService.twitchUsername) {
         return;
       }
 
